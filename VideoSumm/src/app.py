@@ -4,11 +4,10 @@ import torch
 import torchvision 
 import matplotlib.pyplot as plt  
 
-# from helpers import init_helper, adot_vsumm_helper, bbox_helper, video_helper
-# from modules.model_zoo import get_model
-# from dsnet_main import video_shot_main
-# from hashtag import TextRank
-# from thumbnail import make_mask, make_thumbnail_fg, make_thumbnail_bg
+from helpers import init_helper, adot_vsumm_helper, bbox_helper, video_helper
+from modules.model_zoo import get_model
+from dsnet_main import video_shot_main
+from hashtag import TextRank
 from qwer import qwe
 
 from torchvision.io.image import read_image
@@ -77,20 +76,19 @@ def predict():
 
     ##영상요약 
     # video_src = '../custom_data/videos/test11_shopping.mp4'
-    # thumb_input, caption_images = video_shot_main(video_src) #thumb_input: type==list 
+    thumb_input, caption_images = video_shot_main(video_src) #thumb_input: type==list 
     # print(f'len(thumbnail_images): {len(thumb_input)}, len(caption_images): {len(caption_images)}')
-    # return "video summary successed !!"
-    # print("video summary successed!!")
+    print("video summary successed!!")
     ##썸네일 
-    thumb_input = np.load('../output/test/test7_class_thumb_9.npy', allow_pickle= True)
-    thumb_input = thumb_input.tolist()
+    # thumb_input = np.load('../output/test/test7_class_thumb_9.npy', allow_pickle= True)
+    # thumb_input = thumb_input.tolist()
     thumb_path= thumb_nail_main(thumb_input)
     print("thumbnail successed!!")
     ##캡셔닝 
     # caption_images = np.load('/content/drive/MyDrive/skt-flyai /skt-fly-teamHashTag/DSNet/output/test/test10_drawing_thumb_23.npy', allow_pickle = True)
-    sentences = caption_expansion(thumb_input)
+    sentences = caption_expansion(caption_images)
     print("captioning successed !!")
-    print(sentences)
+    # print(sentences)
     ##해시태그 추출 
     hashtag_output = hashtag_main(sentences)
     print("해시태그: ", hashtag_output)
@@ -98,7 +96,7 @@ def predict():
 
     return {
         'video_image': thumb_path, 
-        'video_path': "output summ video path",
+        'video_path': '../ouput/vlog.mp4',
         'video_tag': hashtag_output,
         'user_ID': user_ID
     }

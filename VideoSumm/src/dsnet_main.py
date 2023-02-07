@@ -13,7 +13,7 @@ def video_shot_main(source):
     ckpt_path = '../models/pretrain_ab_basic/checkpoint/summe.yml.0.pt'
     # source = '../custom_data/videos/shasha_drawing0.mp4'
     sample_rate = 15 
-    save_path = '/content/vlog.mp4'
+    save_path = '../output/vlog.mp4'
     nms_thresh = 0.5
 
     # load model
@@ -91,8 +91,7 @@ if __name__ == '__main__':
     ## video summary & save 
     print('*** start video summary ***') 
     thumb_input, caption_images = video_shot_main() # [[image, cps_score, frame_score], ...] 
-    print(f'len(thumbnail_images): {len(thumb_input)}, len(caption_images): {len(caption_images)}')
-    print('--- fisish viedo summary ---')
+    # print(f'len(thumbnail_images): {len(thumb_input)}, len(caption_images): {len(caption_images)}')
 
 
 
