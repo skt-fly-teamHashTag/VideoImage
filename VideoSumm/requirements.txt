@@ -1,5 +1,7 @@
-torchvision==0.3.0
-torch-scatter==1.4.0
+torch
+opencv==4.6.0.66
+torchvision
+torch-scatter
 torch-sparse==0.4.3
 torch-cluster==1.4.5
 torch-geometric==1.3.2
