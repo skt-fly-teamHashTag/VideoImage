@@ -455,7 +455,7 @@ def qwe(input_img):
 
     return dst2
 
-
-# q8 = np.load("/content/gdrive/MyDrive/Colab Notebooks/SKT_FLY_AI/project/image/test10_drawing_thumb_23.npy", allow_pickle=True)
-dst2 = qwe(q8.tolist())
-cv2.imwrite("경로", dst2)
+if __name__== "__main__":
+    # q8 = np.load("/content/gdrive/MyDrive/Colab Notebooks/SKT_FLY_AI/project/image/test10_drawing_thumb_23.npy", allow_pickle=True)
+    dst2 = qwe(q8.tolist())
+    cv2.imwrite("경로", dst2)

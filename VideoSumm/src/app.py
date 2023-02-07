@@ -3,8 +3,6 @@ import numpy as np
 import torch
 import torchvision 
 import matplotlib.pyplot as plt  
-
-from helpers import init_helper, adot_vsumm_helper, bbox_helper, video_helper
 from modules.model_zoo import get_model
 from dsnet_main import video_shot_main
 from hashtag import TextRank
