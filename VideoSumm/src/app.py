@@ -7,6 +7,7 @@ from modules.model_zoo import get_model
 from dsnet_main import video_shot_main
 from hashtag import TextRank
 from qwer import qwe
+import urllib.request
 
 from torchvision.io.image import read_image
 from torchvision.models.detection import maskrcnn_resnet50_fpn, MaskRCNN_ResNet50_FPN_Weights
@@ -65,6 +66,15 @@ def test():
     }
     
 
+def save_video(video_url) :
+    saveName = '../origin_video/video.mp4'
+
+    urllib.request.urlretrieve(video_url,saveName)
+    print("저장완료")
+
+    return saveName
+
+
 @app.route('/video_summary', methods=['POST'])
 def predict():
     
@@ -72,10 +82,12 @@ def predict():
     user_ID = data['user_id'] 
     video_src = data['video_origin_src'] 
 
+    video_path = save_video(video_src)
+
     ##영상요약 
     # video_src = '../custom_data/videos/test11_shopping.mp4'
-    thumb_input, caption_images = video_shot_main(video_src) #thumb_input: type==list 
-    # print(f'len(thumbnail_images): {len(thumb_input)}, len(caption_images): {len(caption_images)}')
+    thumb_input, caption_images = video_shot_main(video_path) #thumb_input: type==list 
+    print(f'len(thumbnail_images): {len(thumb_input)}, len(caption_images): {len(caption_images)}')
     print("video summary successed!!")
     ##썸네일 
     # thumb_input = np.load('../output/test/test7_class_thumb_9.npy', allow_pickle= True)
