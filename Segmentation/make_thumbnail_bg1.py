@@ -16,9 +16,9 @@ def make_thumbnail_bg1(dst1, bg_image, bg_c="sky", text_f="base", text_c="white"
     else:
         dst2 = bg_color[bg_c]
 
-    text_size = cv2.getTextSize(text, text_font[text_f], font_scale, font_thickness)[0]
-    text_x = int((dst2.shape[1] - text_size[0]) / 2)
-    text_y = int((dst2.shape[0] - text_size[1]) / 4 * 3)
+    # text_size = cv2.getTextSize(text, text_font[text_f], font_scale, font_thickness)[0]
+    # text_x = int((dst2.shape[1] - text_size[0]) / 2)
+    # text_y = int((dst2.shape[0] - text_size[1]) / 4 * 3)
     dst1_gray = cv2.cvtColor(dst1, cv2.COLOR_BGR2GRAY)
     _, mask = cv2.threshold(dst1_gray, 0.1, 255, cv2.THRESH_BINARY)
     mask_inv = cv2.bitwise_not(mask)
@@ -27,8 +27,8 @@ def make_thumbnail_bg1(dst1, bg_image, bg_c="sky", text_f="base", text_c="white"
     masked_bg = cv2.bitwise_and(dst2, dst2, mask=mask_inv)
     dst = masked_fg + masked_bg
 
-    cv2.putText(dst, text, (text_x, text_y), text_font[text_f], font_scale, text_color[text_c], font_thickness)
-
+    # cv2.putText(dst, text, (text_x, text_y), text_font[text_f], font_scale, text_color[text_c], font_thickness)
+    dst = cv2.resize(dst, (800, 450))
     return dst
 
 
