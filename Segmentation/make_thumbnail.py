@@ -13,7 +13,7 @@ from make_thumbnail_modern import make_thumbnail_modern
 
 
 def make_thumbnail(thumb_numpy, nickname, category_list):
-    a = Thumbnail(thumb_numpy.tolist(), step=5)
+    a = Thumbnail(thumb_numpy, step=5)
     vlog_message = nickname
     category = -1
     # category_dic = {0: "가족", 1: "스터디", 2: "뷰티", 3: "반려동물", 4: "운동/스포츠", 5: "음식", 6: "여행", 7: "연애/결혼", 8: "문화생활", 9: "직장인"}
@@ -24,6 +24,11 @@ def make_thumbnail(thumb_numpy, nickname, category_list):
         category = category_list[1]
     
     a.forward()
+
+    if category in [2, 7]:
+        dst = make_thumbnail_lovely(outputs=a.outputs, input_data=a.input_data, message=vlog_message)
+        return dst
+
     img_case, outputs, input_data = mask_preprocess(outputs=a.outputs, input_data=a.input_data)
 
     if img_case == 4:
@@ -40,18 +45,13 @@ def make_thumbnail(thumb_numpy, nickname, category_list):
 
     else:
         if category in [1, 4, 9]:
-            dst = make_thumbnail_modern(input_data=input_data, outputs=outputs)
+            dst = make_thumbnail_modern(input_data=input_data, outputs=outputs, message=vlog_message)
         else:
             mask_img = make_mask_img(outputs=outputs, input_data_img=input_data)
             dst = make_thumbnail_fg(img_case, mask_img)
             dst = make_thumbnail_bg1(dst1=dst, bg_image=a.background_img1, bg_c="sky", text_f="base", text_c="white",text=vlog_message, font_scale=2, font_thickness=2)
             dst = cv2.resize(dst, (780, 430))
-            if category in [8, 0, 5, 3, 6]:
-                dst = make_thumbnail_daily(img=dst)
-            else:
-                dst = make_thumbnail_lovely(img=dst)
+            dst = make_thumbnail_daily(img=dst, message=vlog_message)
 
     return dst
 
-
-    

@@ -4,12 +4,8 @@ import torchvision
 import numpy as npp
 import copy
 import random
-from google.colab import drive
-from google.colab.patches import cv2_imshow
 from torchvision.io.image import read_image
 from torchvision.models.detection import maskrcnn_resnet50_fpn, MaskRCNN_ResNet50_FPN_Weights
-
-drive.mount("/content/gdrive")
 
 
 class Thumbnail:
@@ -39,8 +35,8 @@ class Thumbnail:
         self.background_img4 = self.input_data[-1][0]
         self.background_img = [self.background_img2, self.background_img3, self.background_img4]
 
-        self.input_data.sort(key=lambda x:-x[2])
-        self.background_img1 = self.input_data[-1][0]
+        # self.input_data.sort(key=lambda x:-x[2])
+        self.background_img1 = sorted(self.input_data, key=lambda x:-x[2])[-1][0]
 
         self.weights = MaskRCNN_ResNet50_FPN_Weights.DEFAULT
         self.transform = self.weights.transforms()
