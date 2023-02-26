@@ -23,6 +23,7 @@ def poo_make_image(message, img):
 
     draw = ImageDraw.Draw(image)
 
+
     # Text wraper to handle long text
     # 40자를 넘어갈 경우 여러 줄로 나눔
     lines = textwrap.wrap(message, width=40)
@@ -51,8 +52,10 @@ def poo_make_image(message, img):
         rx_text, ry_text = x_text -3 + txt_w, y_text - 3
         draw.text((rx_text, ry_text), line, font=font, fill=(year_color))
     
+    
     image = np.array(image)
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+    
     return image
 
 
@@ -98,9 +101,9 @@ def love_make_image(message, img):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     image = Image.fromarray(img)
 
-    frame = Image.open('frame.png')
-    flower = Image.open('flower.png')
-    flower2 = Image.open('flower2.png')
+    frame = Image.open('img/frame.png')
+    flower = Image.open('img/flower.png')
+    flower2 = Image.open('img/flower2.png')
 
     draw = ImageDraw.Draw(image)
 

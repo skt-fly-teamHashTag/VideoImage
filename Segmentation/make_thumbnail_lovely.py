@@ -64,7 +64,7 @@ def make_thumbnail_lovely(outputs, input_data, message):
     k = (450) / (h * 2)
     seg_img = cv2.resize(seg_img, (None, None), fx=k, fy=k, interpolation=cv2.INTER_AREA)
     bg = np.zeros((450, 800, 3), np.uint8)
-    bg[:seg_img.shape[0], :seg_img.shape[1]] = seg_img
+    bg[:, :] = seg_img[:450, :800]
 
     tmp = cv2.cvtColor(bg, cv2.COLOR_BGR2GRAY)
     _, tmp = cv2.threshold(tmp, 0.9, 255, cv2.THRESH_BINARY)
@@ -83,7 +83,7 @@ def make_thumbnail_lovely(outputs, input_data, message):
 
     cnt, labels, stats, centroids = cv2.connectedComponentsWithStats(tmp)
     (x, y, w, h, area) = stats[1]
-    mat = np.float32([[1, 0, 400 - w // 2], [0, 1, 225 - h // 2]])
+    mat = np.float32([[1, 0, 400 - w // 2 - 20], [0, 1, 225 - h // 2 - 20]])
     bg = cv2.warpAffine(bg, mat, (0, 0))
 
     tmp = cv2.cvtColor(bg, cv2.COLOR_BGR2GRAY)

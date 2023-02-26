@@ -52,6 +52,7 @@ def make_thumbnail(thumb_numpy, nickname, category_list):
             dst = make_thumbnail_bg1(dst1=dst, bg_image=a.background_img1, bg_c="sky", text_f="base", text_c="white",text=vlog_message, font_scale=2, font_thickness=2)
             dst = cv2.resize(dst, (780, 430))
             dst = make_thumbnail_daily(img=dst, message=vlog_message)
-
+            
+    dst = cv2.resize(dst, (800, 450))
     return dst
 
