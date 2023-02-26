@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 def poo_make_image(message, img):
     # font setting
-    year = "2023"
+    year = " 2023"
     font = ImageFont.truetype('font/thum1.otf', size=70)
     background_color = 'rgb(0,0,0)'
     txt_color = 'rgb(255,212,0)'
@@ -59,7 +59,7 @@ def poo_make_image(message, img):
     return image
 
 
-def partition_make_image(message,img):
+def partition_make_image(message, img):
     # font setting
     font = ImageFont.truetype('font/thum2.ttf', size=70)
     background_color = 'rgb(0,0,0)'
