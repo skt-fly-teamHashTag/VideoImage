@@ -1,7 +1,7 @@
-import cv2
+import cv2  
 import torch
 import torchvision
-import numpy as npp
+import numpy as np
 import copy
 import random
 from torchvision.io.image import read_image
@@ -10,7 +10,8 @@ from torchvision.models.detection import maskrcnn_resnet50_fpn, MaskRCNN_ResNet5
 
 class Thumbnail:
     def __init__(self, input_img, step=5):
-        self.input_data = input_img
+        for i in range(0, len(input_img), 5):
+            self.input_data.append(input_img[i])
         self.step = step
         self.original_height = self.input_data[0][0].shape[0]
         self.original_width = self.input_data[0][0].shape[1]
